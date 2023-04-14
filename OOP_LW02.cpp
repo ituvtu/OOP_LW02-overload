@@ -102,45 +102,6 @@ public:
 
     }
 
-    // Геттер для кількості стовпців
-    int getColumns() const {
-        return columns;
-    }
-
-    // Сеттер для кількості стовпців
-    void setColumns(int cols) {
-        columns = cols;
-    }
-
-    // Геттер для кількості рядків
-    int getRows() const {
-        return rows;
-    }
-
-    // Сеттер для кількості рядків
-    void setRows(int rows) {
-        this->rows = rows;
-    }
-
-    // Геттер для елемента матриці з заданими індексами
-    int getElement(int row, int col) const {
-        if (row >= rows || col >= columns) {
-            cout << "Invalid index of element";
-            return -1;
-   
-        }
-        return elements[row][col];
-    }
-
-    // Сеттер для елемента матриці з заданими індексами
-    void setElement(int row, int col, int value) {
-        if (row >= rows || col >= columns) {
-            cout << "Invalid index of element";
-            return;
-        }
-        elements[row][col] = value;
-    }
-
     // Оператор присвоєння
     Matrix& operator=(const Matrix& other) {
         if (this != &other) {
@@ -196,9 +157,7 @@ public:
     // перевантаження оператора +
     Matrix operator+(const Matrix& other) const {
         if (rows != other.rows || columns != other.columns) {
-            // матриці мають різну розмірність, неможливо додати
-            cout << "Matrices have different dimensions";
-            return Matrix(); // Повертаємо пусту матрицю
+            return Matrix();
         }
 
         Matrix result(rows, columns,0);
@@ -227,8 +186,6 @@ public:
         Matrix result(rows, other.columns,0);
         // перевірка на відповідність розмірів матриць
         if (columns != other.rows) {
-            cout << "Matrix dimensions do not match for multiplication!" << endl;
-            // повертаємо пусту матрицю
             return Matrix();
         }
         for (int i = 0; i < rows; i++) {
@@ -279,7 +236,6 @@ public:
     // перевантаження операції >
     bool operator>(const Matrix& other) const {
         if (rows != other.rows || columns != other.columns) {
-            cout << "Cannot compare matrices of different sizes."<<endl;
             return false;
         }
         for (int i = 0; i < rows; i++) {
@@ -295,7 +251,6 @@ public:
     // перевантаження операції <
     bool operator<(const Matrix& other) const {
         if (rows != other.rows || columns != other.columns) {
-            cout << "Cannot compare matrices of different sizes."<<endl;
             return false;
         }
         for (int i = 0; i < rows; i++) {
@@ -318,6 +273,9 @@ public:
         return (*this < other) || (*this == other);
     }
 };
+
+
+
 int main() {
     // Створення матриці з нулів розміром 3х3
     Matrix m1;
@@ -329,23 +287,13 @@ int main() {
     // Створення копії матриці
     Matrix m4 = m3;
     // Вивід елементів матриці
-    cout << "Matrix m1:" << endl;
-    for (int i = 0; i < m1.getRows(); i++) {
-        for (int j = 0; j < m1.getColumns(); j++) {
-            cout << m1.getElement(i, j) << " ";
-        }
-        cout << endl;
-    }
+    cout << "Matrix m1:" <<m1<< endl;
+   
     cout << "Matrix m2:" <<m2<< endl;
     
     cout << "Matrix m3:" <<m3<< endl;
     
     cout << "Matrix m4:" <<m4<< endl;
-
-    // Зміна значення елементу матриці
-    m2.setElement(0, 0, 100);
-    cout << "Matrix m2 after change:" <<m2<< endl;
-    
     
     cout << "create new matrix A"<<endl;
 
